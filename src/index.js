@@ -6,9 +6,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function createTodoList(e){
     e.preventDefault();
-    let li = document.createElement("li")
-    li.textContent = e.target["new-task-description"].value
-    document.getElementById("tasks").appendChild(li)
+    document.getElementById("tasks").innerHTML += `<li>${e.target["new-task-description"].value} <span><input class="delete-todo" type="submit" value="x"></span></li>`
     e.target["new-task-description"].value = ""
   }
+
+  const deleteContainer = document.querySelector("#tasks")
+  deleteContainer.addEventListener("click", handleDelete)
+  
+  
+  function handleDelete(e){
+    e.preventDefault()
+    if (e.target.classList.contains('delete-todo')) {
+      console.log(e.target.parentNode.parentNode.remove())
+    }
+  }
 });
+
